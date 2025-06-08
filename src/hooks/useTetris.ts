@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { INITIAL_DROP_TIME } from '../constants/tetris';
 import { GameState, Tetromino, TetrominoType } from '../types/tetris';
 import {
   createEmptyBoard,
@@ -24,7 +25,7 @@ const initialGameState: GameState = {
   lines: 0,
   gameOver: false,
   paused: false,
-  dropTime: 1000,
+  dropTime: INITIAL_DROP_TIME,
   lastDrop: 0,
 };
 

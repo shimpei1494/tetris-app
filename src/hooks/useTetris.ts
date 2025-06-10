@@ -57,6 +57,7 @@ export const useTetris = () => {
         currentPiece: newPiece,
         nextPiece,
         canHold: true,
+        // dropTime: 1000,
       };
     });
   }, []);
@@ -185,7 +186,7 @@ export const useTetris = () => {
           score: prev.score + pointsEarned,
           level: newLevel,
           lines: newLines,
-          dropTime: calculateDropTime(newLevel),
+          // dropTime: 1000,
         };
       }
     });
@@ -223,14 +224,14 @@ export const useTetris = () => {
     if (gameState.lastDrop && !gameState.gameOver && !gameState.paused && gameState.currentPiece) {
       dropPiece();
     }
-  }, [gameState.lastDrop, dropPiece, gameState.gameOver, gameState.paused, gameState.currentPiece]);
+  }, [gameState.lastDrop]);
 
   // Effect to spawn new pieces
   useEffect(() => {
     if (!gameState.currentPiece && !gameState.gameOver) {
       spawnNewPiece();
     }
-  }, [gameState.currentPiece, gameState.gameOver, spawnNewPiece]);
+  }, [gameState.currentPiece, gameState.gameOver]);
 
   // Game loop effect
   useEffect(() => {

@@ -23,6 +23,7 @@ export const Tetris: React.FC = () => {
   };
 
   const handleRestart = () => {
+    actions.pauseGame();
     setSelectLevel(true);
   };
 

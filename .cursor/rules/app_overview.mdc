@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# アプリ概要: TypeScript製テトリスゲーム
+
+## 構成
+- **フロントエンド:** React + TypeScript
+- **主要ディレクトリ:**
+  - `src/components/` : ゲーム画面や操作UIなどのReactコンポーネント群
+  - `src/hooks/` : ゲームロジック用のカスタムフック（例: useTetris）
+  - `src/constants/` : テトリスの定数定義
+  - `src/types/` : 型定義（Tetromino, GameStateなど）
+  - `src/utils/` : テトリスのロジックやユーティリティ関数
+
+## 主な機能
+- テトリスの基本的なプレイ（操作、回転、ホールド、ハードドロップ、スコア・レベル管理）
+- ゲームの一時停止・再開
+- 次のピース・ホールドピースの表示
+- キーボード操作対応
+
+## 技術スタック
+- React, TypeScript, Vite
+
+---
+
+このアプリはTypeScriptとReactで実装されたテトリスゲームです。ゲームロジックはカスタムフック（useTetris）に集約され、UIはコンポーネント分割されています。

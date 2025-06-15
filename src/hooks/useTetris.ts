@@ -23,7 +23,9 @@ const initialGameState: GameState = {
   level: 0,
   lines: 0,
   gameOver: false,
-  paused: false,
+  // Start the game in a paused state so blocks don't fall before the user
+  // selects the starting level.
+  paused: true,
   dropTime: 1000,
   lastDrop: 0,
 };
@@ -178,6 +180,7 @@ export const useTetris = () => {
         const newLines = prev.lines + linesCleared;
         const newLevel = calculateLevel(newLines);
         const pointsEarned = calculateScore(linesCleared, prev.level);
+        const newDropTime = calculateDropTime(newLevel);
 
         return {
           ...prev,
@@ -186,7 +189,7 @@ export const useTetris = () => {
           score: prev.score + pointsEarned,
           level: newLevel,
           lines: newLines,
-          // dropTime: 1000,
+          dropTime: newDropTime,
         };
       }
     });
@@ -293,10 +296,18 @@ export const useTetris = () => {
     setGameState(prev => ({ ...prev, paused: !prev.paused }));
   }, []);
 
-  const resetGame = useCallback(() => {
-    setGameState({ 
-      ...initialGameState, 
-      nextPiece: getRandomTetromino() 
+  const pauseGame = useCallback(() => {
+    setGameState(prev => ({ ...prev, paused: true }));
+  }, []);
+
+  const resetGame = useCallback((level: number = 0) => {
+    // When starting a new game, unpause so the pieces begin to fall.
+    setGameState({
+      ...initialGameState,
+      level,
+      paused: false,
+      dropTime: calculateDropTime(level),
+      nextPiece: getRandomTetromino(),
     });
     setPieceStats({ I: 0, O: 0, T: 0, S: 0, Z: 0, J: 0, L: 0 });
     lastTimeRef.current = 0;
@@ -311,6 +322,7 @@ export const useTetris = () => {
     ghostPiece,
     actions: {
       togglePause,
+      pauseGame,
       resetGame,
       movePiece,
       rotatePiece: rotatePieceAction,

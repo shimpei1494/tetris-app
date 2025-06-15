@@ -76,3 +76,5 @@ export const DROP_TIME_BY_LEVEL: Record<number, number> = {
   13: 120,  // 0.12秒
   14: 100,  // 0.1秒（最速）
 };
+
+export const MAX_LEVEL = 14;

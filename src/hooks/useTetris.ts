@@ -178,6 +178,7 @@ export const useTetris = () => {
         const newLines = prev.lines + linesCleared;
         const newLevel = calculateLevel(newLines);
         const pointsEarned = calculateScore(linesCleared, prev.level);
+        const newDropTime = calculateDropTime(newLevel);
 
         return {
           ...prev,
@@ -186,7 +187,7 @@ export const useTetris = () => {
           score: prev.score + pointsEarned,
           level: newLevel,
           lines: newLines,
-          // dropTime: 1000,
+          dropTime: newDropTime,
         };
       }
     });
@@ -293,10 +294,12 @@ export const useTetris = () => {
     setGameState(prev => ({ ...prev, paused: !prev.paused }));
   }, []);
 
-  const resetGame = useCallback(() => {
-    setGameState({ 
-      ...initialGameState, 
-      nextPiece: getRandomTetromino() 
+  const resetGame = useCallback((level: number = 0) => {
+    setGameState({
+      ...initialGameState,
+      level,
+      dropTime: calculateDropTime(level),
+      nextPiece: getRandomTetromino()
     });
     setPieceStats({ I: 0, O: 0, T: 0, S: 0, Z: 0, J: 0, L: 0 });
     lastTimeRef.current = 0;

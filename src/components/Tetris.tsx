@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GameBoard } from './GameBoard';
 import { NextPiece } from './NextPiece';
 import { GameStatsComponent } from './GameStats';
 import { GameControls } from './GameControls';
+import { LevelSelect } from './LevelSelect';
 import { useTetris } from '../hooks/useTetris';
 
 export const Tetris: React.FC = () => {
   const { gameState, pieceStats, ghostPiece, actions } = useTetris();
+  const [selectLevel, setSelectLevel] = useState(true);
 
   const gameStats = {
     score: gameState.score,
     level: gameState.level,
     lines: gameState.lines,
     pieces: pieceStats,
+  };
+
+  const startGame = (level: number) => {
+    actions.resetGame(level);
+    setSelectLevel(false);
+  };
+
+  const handleRestart = () => {
+    setSelectLevel(true);
   };
 
   return (
@@ -49,7 +60,7 @@ export const Tetris: React.FC = () => {
                   <p className="text-gray-300 mb-2">Final Score: {gameState.score.toLocaleString()}</p>
                   <p className="text-gray-300 mb-6">Level: {gameState.level}</p>
                   <button
-                    onClick={actions.resetGame}
+                    onClick={handleRestart}
                     className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-semibold"
                   >
                     Play Again
@@ -74,7 +85,7 @@ export const Tetris: React.FC = () => {
             <GameControls
               isPaused={gameState.paused}
               onTogglePause={actions.togglePause}
-              onRestart={actions.resetGame}
+              onRestart={handleRestart}
             />
           </div>
         </div>
@@ -85,6 +96,7 @@ export const Tetris: React.FC = () => {
           </p>
         </footer>
       </div>
+      {selectLevel && <LevelSelect onStart={startGame} />}
     </div>
   );
 };

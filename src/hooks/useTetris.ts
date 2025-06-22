@@ -231,6 +231,7 @@ export const useTetris = () => {
     if (gameState.lastDrop && !gameState.gameOver && !gameState.paused && gameState.currentPiece) {
       dropPiece();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.lastDrop]);
 
   // Effect to spawn new pieces
@@ -238,6 +239,7 @@ export const useTetris = () => {
     if (!gameState.currentPiece && !gameState.gameOver) {
       spawnNewPiece();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.currentPiece, gameState.gameOver]);
 
   // Game loop effect

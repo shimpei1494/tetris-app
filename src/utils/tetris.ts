@@ -1,4 +1,4 @@
-import { Tetromino, TetrominoType, Position, GameState } from '../types/tetris';
+import { Tetromino, TetrominoType, Position } from '../types/tetris';
 import { 
   TETROMINO_SHAPES, 
   TETROMINO_COLORS, 

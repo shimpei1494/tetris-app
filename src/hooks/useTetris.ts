@@ -159,6 +159,10 @@ export const useTetris = () => {
     });
   }, []);
 
+  const togglePause = useCallback(() => {
+    setGameState(prev => ({ ...prev, paused: !prev.paused }));
+  }, []);
+
   const dropPiece = useCallback(() => {
     setGameState(prev => {
       if (!prev.currentPiece || prev.gameOver || prev.paused) return prev;
@@ -290,11 +294,7 @@ export const useTetris = () => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [movePiece, rotatePieceAction, hardDrop, holdPieceAction, gameState.gameOver]);
-
-  const togglePause = useCallback(() => {
-    setGameState(prev => ({ ...prev, paused: !prev.paused }));
-  }, []);
+  }, [movePiece, rotatePieceAction, hardDrop, holdPieceAction, togglePause, gameState.gameOver]);
 
   const pauseGame = useCallback(() => {
     setGameState(prev => ({ ...prev, paused: true }));

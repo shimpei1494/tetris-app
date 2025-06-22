@@ -1,10 +1,11 @@
 import React from 'react';
 import { BOARD_WIDTH, BOARD_HEIGHT } from '../constants/tetris';
+import { Tetromino } from '../types/tetris';
 
 interface GameBoardProps {
   board: (string | null)[][];
-  currentPiece: any;
-  ghostPiece?: any;
+  currentPiece: Tetromino | null;
+  ghostPiece?: Tetromino | null;
 }
 
 export const GameBoard: React.FC<GameBoardProps> = ({ 

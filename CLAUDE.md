@@ -9,6 +9,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` - プロダクションビルド
 - `npm run lint` - ESLintによるコード検査
 - `npm run preview` - ビルド結果のプレビュー
+- `npm run test` - テスト実行（watch モード）
+- `npm run test:run` - テスト実行（一度のみ）
+- `npm run test:ui` - テストUIモード
 
 ### TypeScript設定
 - `tsconfig.json` - メインのTypeScript設定
